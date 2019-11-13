@@ -25,7 +25,7 @@
                                     @foreach (Cart::getContent() as $product)
                                         <tr class="cart_item">
                                             <td class="product-remove">
-                                                <a href="#" class="product-del remove" title="Remove this item">
+                                                <a href="{{route('cart.delete', ['id' => $product->id])}}" class="product-del remove" title="Remove this item">
                                                     <i class="seoicon-delete-bold"></i>
                                                 </a>
                                             </td>
@@ -48,16 +48,26 @@
                                             <td class="product-quality">
                                                 <div class="quantity">
                                                     <a href="#" class="quantity-minus">-</a>
-                                                    <input title="quantity" class="email input-text qty text" type="text" value="{{$product->quantity}}" placeholder="1" readonly>
+                                                    <input title="quantity" class="email input-text text" type="text" value="{{$product->quantity}}" placeholder="1" readonly>
                                                     <a href="#" class="quantiy-plus">+</a>
                                                 </div>
                                             </td>
-
                                             <td class="product-subtotal">
-                                                <h5 class="total amount">${{Cart::getSubTotal()}}</h5>
-                                            </td>
+                                                    <h5 class="total amount">${{$product->price * $product->quantity}}</h5>
+                                                </td>
+                                            
                                         </tr>
+                                        
                                     @endforeach
+                                    <tr class="cart_item">
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                                <td class="product-subtotal">
+                                                        <h5 class="total amount">${{Cart::getSubTotal()}}</h5>
+                                                    </td>
+                                        </tr>
                                     <tr>
                                         <td colspan="5" class="actions">
                                             <div class="coupon">

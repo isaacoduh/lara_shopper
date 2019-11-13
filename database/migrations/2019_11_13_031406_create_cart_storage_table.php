@@ -4,28 +4,31 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateShoppingCartTable extends Migration
+class CreateCartStorageTable extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
     public function up()
     {
-        Schema::create('shopping_cart', function (Blueprint $table) {
-            $table->string('id');
-            // $table->string('instance');
-            // $table->text('content');
+        Schema::create('cart_storage', function (Blueprint $table) {
+            $table->string('id')->index();
+            $table->longText('cart_data');
             $table->timestamps();
 
-            // $table->primary(['id', 'instance']);
+            $table->primary('id');
         });
     }
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
     public function down()
     {
-        Schema::drop('shopping_cart');
+        Schema::dropIfExists('cart_storage');
     }
 }
