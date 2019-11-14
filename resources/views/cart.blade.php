@@ -47,9 +47,9 @@
 
                                             <td class="product-quality">
                                                 <div class="quantity">
-                                                    <a href="#" class="quantity-minus">-</a>
+                                                    <a href="{{route('cart.decrement', ['id' => $product->id, 'quantity' => $product->quantity])}}" class="quantity-minus">-</a>
                                                     <input title="quantity" class="email input-text text" type="text" value="{{$product->quantity}}" placeholder="1" readonly>
-                                                    <a href="#" class="quantiy-plus">+</a>
+                                                    <a href="{{route('cart.increment', ['id' => $product->id, 'quantity' => $product->quantity])}}" class="quantity-plus">+</a>
                                                 </div>
                                             </td>
                                             <td class="product-subtotal">
@@ -68,7 +68,7 @@
                                                         <h5 class="total amount">${{Cart::getSubTotal()}}</h5>
                                                     </td>
                                         </tr>
-                                    <tr>
+                                    {{-- <tr>
                                         <td colspan="5" class="actions">
                                             <div class="coupon">
                                                 <input name="coupon_code" class="email input-standard-grey" value="" placeholder="Coupon code" type="text">
@@ -82,14 +82,14 @@
                                                 <span class="semicircle"></span>
                                             </div>
                                         </td>
-                                    </tr>
+                                    </tr> --}}
                                 </tbody>
                             </table>
                         </form>
                         <div class="cart-total">
                             <h3 class="cart-total-title">Cart Totals</h3>
-                            <h5 class="cart-total-total">Total: <span class="price">$100.97</span></h5>
-                            <a href="" class="btn btn-medium btn--light-green btn-hover-shadow">
+                            <h5 class="cart-total-total">Total: <span class="price">${{Cart::getTotal()}}</span></h5>
+                            <a href="{{route('cart.checkout')}}" class="btn btn-medium btn--light-green btn-hover-shadow">
                                 <span class="text">Checkout</span>
                                 <span class="semicircle"></span>
                             </a>

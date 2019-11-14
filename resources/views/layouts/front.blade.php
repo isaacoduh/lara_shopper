@@ -19,6 +19,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('app/css/primary-menu.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('app/css/magnific-popup.css') }}">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+
     <!--Styles for RTL-->
 
     <!--<link rel="stylesheet" type="text/css" href="{{ asset('app/css/rtl.css') }}">-->
@@ -43,16 +45,20 @@
 
                     <a href="#" class="js-cart-animate">
                         <i class="seoicon-basket"></i>
-                        <span class="cart-count">0</span>
+                        <span class="cart-count">{{Cart::getContent()->count()}}</span>
                     </a>
 
                     <div class="cart-popup-wrap">
                         <div class="popup-cart">
-                            <h4 class="title-cart">No products in the cart!</h4>
-                            <p class="subtitle">Please make your choice.</p>
-                            <div class="btn btn-small btn--dark">
-                                <span class="text">view all catalog</span>
-                            </div>
+                            <h4 class="title-cart">${{Cart::getTotal()}}</h4>
+                            <br>
+                            <a href="/cart">
+                                {{-- <p class="subtitle">Please make your choice.</p> --}}
+                                <div class="btn btn-small btn--dark">
+                                    <span class="text">View Cart</span>
+                                </div>
+                            </a>
+                            
                         </div>
                     </div>
 
@@ -108,8 +114,18 @@
 <script src="{{ asset('app/js/velocity.min.js') }}"></script>
 <script src="{{ asset('app/js/ScrollMagic.min.js') }}"></script>
 <script src="{{ asset('app/js/animation.velocity.min.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
 <!-- ...end JS Script -->
+
+<script>
+    @if(Session::has('success'))
+        toastr.success('{{Session::get('success')}}');
+    @endif    
+    @if(Session::has('info'))
+        toastr.info('{{Session::get('info')}}');
+    @endif    
+</script>
 
 
 </body>

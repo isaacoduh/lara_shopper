@@ -37,6 +37,31 @@ Route::get('/cart/delete/{id}', [
     'as' => 'cart.delete'
 ]);
 
+Route::get('/cart/increment/{id}/{quantity}', [
+    'uses' => 'ShoppingController@increment',
+    'as' => 'cart.increment'
+]);
+
+Route::get('/cart/decrement/{id}/{quantity}', [
+    'uses' => 'ShoppingController@decrement',
+    'as' => 'cart.decrement'
+]);
+
+Route::get('/cart/rapid/add/{id}', [
+    'uses' => 'ShoppingController@rapid_add',
+    'as' => 'cart.rapid.add'
+]);
+
+Route::get('/cart/checkout',[
+    'uses' => 'CheckoutController@index',
+    'as' => 'cart.checkout'
+]);
+
+Route::post('/cart/checkout', [
+    'uses' => 'CheckoutController@pay', 
+    'as' => 'cart.checkout'
+]);
+
 
 Route::resource('products', 'ProductsController');
 

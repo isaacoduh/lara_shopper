@@ -41,4 +41,42 @@ class ShoppingController extends Controller
         Session::flash('success', 'Product removed from cart.');
         return redirect()->back();
     }
+
+    public function increment($id, $quantity)
+    {
+        Cart::update($id, array(
+            'quantity' => 1,
+        ));
+
+        Session::flash('success', 'Product quantity updated');
+
+        return redirect()->back();
+    }
+
+    public function decrement($id, $quantity)
+    {
+        Cart::update($id, array(
+            'quantity' => -1,
+        ));
+
+        Session::flash('success', 'Product quantity updated');
+
+        return redirect()->back();
+    }
+
+    public function rapid_add($id)
+    {
+        $product = Product::find($id);
+
+        $cartItem = Cart::add([
+            'id'=> $product->id,
+            'name' => $product->name,
+            'quantity' => 1,
+            'price' => $product->price
+        ]);
+
+        Session::flash('success', 'Product added to cart');
+
+        return redirect()->route('cart');
+    }
 }
